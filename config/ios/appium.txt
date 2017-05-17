@@ -1,0 +1,6 @@
+[caps]
+platformName="iOS"
+deviceName="iPhone SE"
+platformVersion="10.3"
+automationName="XCUITest"
+app="ios/HelloWorld.app.zip"
