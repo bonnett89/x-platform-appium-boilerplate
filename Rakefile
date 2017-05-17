@@ -1,1 +1,2 @@
-# Tasks will go in here
+require 'rake'
+require 'tenjin'
