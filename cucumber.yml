@@ -1,0 +1,2 @@
+fast: --tags @fast
+slow: --tags @slow
