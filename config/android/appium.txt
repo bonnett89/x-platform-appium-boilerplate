@@ -1,3 +1,4 @@
 [caps]
-platformName="Android"
+platformName=""
 deviceName=""
+app = ""
