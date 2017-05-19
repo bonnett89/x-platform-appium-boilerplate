@@ -22,14 +22,12 @@ end
 
 desc 'Run iOS Cucumber tests'
 task :ios_cucumber, [:profile] do |_t, args|
-  ENV['PLATFORM_NAME'] = 'iOS'
   Rake::Task[:start_appium].invoke('false')
   Rake::Task[:cucumber].invoke('ios', args[:profile])
 end
 
 desc 'Run Android Cucumber tests'
 task :android_cucumber, [:profile] do |_t, args|
-  ENV['PLATFORM_NAME'] = 'Android'
   Rake::Task[:start_appium].invoke('false')
   Rake::Task[:cucumber].invoke('android', args[:profile])
 end
