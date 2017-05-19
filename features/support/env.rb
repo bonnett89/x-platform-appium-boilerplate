@@ -4,9 +4,9 @@ require 'cucumber/ast'
 require_relative 'appium_world'
 require_relative '../pages/page_factory'
 
-raise 'NO PLATFORM NAME environment variable' if ENV['PLATFORM_NAME'].nil?
+# raise 'NO PLATFORM NAME environment variable' if ENV['PLATFORM_NAME'].nil?
 
-platform = ENV['PLATFORM_NAME'].downcase
+platform = ENV['PLATFORM'].downcase
 
 appium_file_path = "./config/#{platform}/appium.txt"
 
