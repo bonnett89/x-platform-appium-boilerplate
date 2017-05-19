@@ -13,24 +13,25 @@ end
 
 # TODO: Take a profile argument as well
 desc 'Run Cucumber'
-task :cucumber, [:platform] do |_t, args|
+task :cucumber, %i[platform profile] do |_t, args|
   platform = args[:platform]
+  profile = args[:profile]
   appium_server_url = AppiumServer.url
-  CucumberBDD.new(platform, appium_server_url).execute
+  CucumberBDD.new(platform, profile, appium_server_url).execute
 end
 
 desc 'Run iOS Cucumber tests'
-task :ios_cucumber do
+task :ios_cucumber, [:profile] do |_t, args|
   ENV['PLATFORM_NAME'] = 'iOS'
   Rake::Task[:start_appium].invoke('false')
-  Rake::Task[:cucumber].invoke('ios')
+  Rake::Task[:cucumber].invoke('ios', args[:profile])
 end
 
 desc 'Run Android Cucumber tests'
-task :android_cucumber do
+task :android_cucumber, [:profile] do |_t, args|
   ENV['PLATFORM_NAME'] = 'Android'
   Rake::Task[:start_appium].invoke('false')
-  Rake::Task[:cucumber].invoke('android')
+  Rake::Task[:cucumber].invoke('android', args[:profile])
 end
 
 def block
