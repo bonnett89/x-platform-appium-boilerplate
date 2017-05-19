@@ -1,4 +1,5 @@
 require 'httparty'
+require 'tty-spinner'
 
 require_relative 'start_appium_server'
 
@@ -11,19 +12,18 @@ class AppiumServer < StartAppiumServer
   def self.start(host, port)
     @host = host
     @port = port
-
+    spinner = TTY::Spinner.new('[:spinner] Appium starting ...', format: :dots)
     if running?
       puts "Appium server already running at #{url}"
     else
       @command = StartAppiumServer.new(@host, @port)
       @command.execute
-
+      spinner.auto_spin
       loop do
         break if running?
-        puts 'Waiting for Appium server to start... '
-        sleep 1
       end
     end
+    spinner.stop('done')
   end
 
   def self.url
