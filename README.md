@@ -9,6 +9,7 @@ The following dependencies will need to be installed first. Please follow their 
 
 - Ruby and RubyGems
 - Node and npm
+- Carthage `brew install carthage`
 
 ### Android
 - Android Studio
