@@ -1,6 +1,8 @@
 # x-platform-appium-boilerplate
 Cross platform example testing codebase for Appium
 
+This is an example of how Appium can be used to test a cross platform application, albeit in this case a very very simple one.
+
 ## Prerequisites
 
 The following dependencies will need to be installed first. Please follow their installation and set up guides.
@@ -28,7 +30,7 @@ $ npm install
 ```
 ## Configuration
 
-In the ```config``` folder you will find two additional folders: ```android & ios```. These contain ```appium.txt``` capabilities files. Within these you wil need to edit the fields based up the configuration you have.
+In the `config` folder you will find two additional folders: `android & ios`. These contain `appium.txt` capabilities files. Within these you wil need to edit the fields based up the configuration you have.
 
 #### Example iOS:
 ```
@@ -39,13 +41,13 @@ platformVersion="10.3"
 automationName="XCUITest"
 app="ios/HelloWorld.app.zip"
 ```
-**deviceName** is the name of the simulator that you want to run on, to determine which ones you have installed you can run: ```$ instruments -s devices``` or open _Xcode > Window > Devices_ which will list the available simulators.
+**deviceName** is the name of the simulator that you want to run on, to determine which ones you have installed you can run: `$ instruments -s devices` or open _Xcode > Window > Devices_ which will list the available simulators.
 
 **platformVersion** is the version of iOS that will be running. This needs to be the same as the simulators on which you are running.
 
 **automationName** this is only really applicable to iOS and newer flavours of iOS (Xcode 8+) it needs to be set to: `XCUITest`.
 
-**app** is just a reference to where the app undertest is located. You just need to make sure this points to the iOS app not an Android one.
+**app** is just a reference to where the app under test is located. You just need to make sure this points to the iOS app not an Android one.
 
 # Running the tests
 
@@ -59,9 +61,9 @@ This will first spin up an Appium server and then launch Cucumber. This test can
 
 #### To run Android tests:
 ```
-$ rake andorid_cucumber
+$ rake android_cucumber
 ```
-This works exactly the same as the ios tests above.
+This works exactly the same as the iOS tests above.
 
 ### Android Caveats
 - An Android Virtual Device must be running before tests are started.
