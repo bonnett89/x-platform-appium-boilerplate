@@ -11,7 +11,6 @@ task :start_appium, [:block] do |_t, args|
   block unless args[:block] && args[:block] == 'false'
 end
 
-# TODO: Take a profile argument as well
 desc 'Run Cucumber'
 task :cucumber, %i[platform profile] do |_t, args|
   platform = args[:platform]
