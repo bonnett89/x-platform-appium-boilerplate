@@ -1,12 +1,15 @@
 require 'rake'
+require 'uri'
 
 require_relative './features/support/appium_server'
 require_relative './features/support/cucumber_bdd'
 
 desc 'Start an Appium Server'
 task :start_appium, [:block] do |_t, args|
-  # TODO: Set url for Appium server
-  AppiumServer.start('0.0.0.0', '4723')
+  appium_url = URI(get_server_configuration['appium_url'])
+  appium_host = appium_url.host
+  appium_port = appium_url.port
+  AppiumServer.start(appium_host, appium_port)
 
   block unless args[:block] && args[:block] == 'false'
 end
@@ -40,6 +43,15 @@ def block
     Signal.trap('INT') do
       abort('She cannot take any more of this, Captain!')
     end
+  end
+end
+
+def get_server_configuration
+  config_path = './config/server_config.yml'
+  if File.exist?(config_path)
+    YAML.load(File.read(config_path))
+  else
+    abort 'Cannot find server configuration file, please add in the config directory.'
   end
 end
 
