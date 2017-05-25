@@ -4,7 +4,7 @@ This project is built around using Cucumber with Appium and the Page Object Mode
 
 #### env.rb
 
-We use the `env` file to carry out a number of things. We set the file path of the `appium.txt` for the platform under test, and load this into a `caps` object using the `Appium.load_settings` method. We then create a new instance of a driver based upon these `caps`(capabilites). Next we use `Appium.promote_appium_methods` to make them available for use with out page objects.
+We use the `env` file to carry out a number of things. We set the file path of the `appium.txt` for the platform under test, and load this into a `caps` object using the `Appium.load_settings` method. We then create a new instance of a driver based upon these `caps`(capabilites). Next we use `Appium.promote_appium_methods` to make them available for use with our page objects.
 
 The `World do` method is used to create a new instance of the `PageFactory` class passing both the platform under test and driver that we created earlier to it. We also create an instance of the `AppiumWorld` class again passing the driver, but also the newly created `page_factory` instance.
 
