@@ -62,7 +62,7 @@ end
 def server_configuration
   config_path = './config/server_config.yml'
   if File.exist?(config_path)
-    YAML.load(File.read(config_path))
+    YAML.safe_load(File.read(config_path))
   else
     abort 'Cannot find server configuration file, please add in the config directory.'
   end
