@@ -1,5 +1,6 @@
 require 'appium_lib'
 require 'cucumber/ast'
+require 'uri'
 
 require_relative 'appium_world'
 require_relative '../pages/page_factory'
@@ -9,10 +10,12 @@ require_relative '../pages/page_factory'
 platform = ENV['PLATFORM'].downcase
 
 appium_file_path = "./config/#{platform}/appium.txt"
+appium_url = URI("#{ENV['APPIUM_SERVER_URL']}/wd/hub")
 
-caps = Appium.load_settings(file: appium_file_path, verbose: true)
+caps = Appium.load_settings(file: appium_file_path, verbose: true)[:caps]
 
-driver = Appium::Driver.new(caps)
+driver = Appium::Driver.new(caps: caps, appium_lib: { port: appium_url.port })
+
 Appium.promote_appium_methods AppiumWorld
 
 World do

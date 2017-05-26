@@ -24,7 +24,7 @@ The following dependencies will need to be installed first. Please follow their 
 You do not need both Android and iOS but will need which ever is relevant to the tests you are running.
 
 Once above dependencies are added please run:
-```
+```sh
 $ gem install bundler
 $ bundle install
 $ npm install
@@ -50,18 +50,24 @@ app="ios/HelloWorld.app.zip"
 
 **app** is just a reference to where the app under test is located. You just need to make sure this points to the iOS app not an Android one.
 
-# Running the tests
+### Running the tests
+
+The first step needed is to build the example applications. Please follow the below steps for iOS:
+- From the terminal run: `xcodebuild -showsdks`
+This should list the sdk's you currently have available to build to. Select one with simulator in the name and note / copy this part: `-sdk iphonesimulator10.3`
+- Now from terminal run: `xcodebuild -sdk iphonesimulator10.3`
+This should build the project files to the following directory `/ios/build`, update your `appium.txt` to reflect the location of where the now build `.app` file is.
 
 This project uses rake tasks to run the tests for iOS and Android. A list of available tasks can be seen by running: `rake --tasks`.
 
 #### To run iOS tests:
-```
+```sh
 $ rake ios_cucumber
 ```
 This will first spin up an Appium server and then launch Cucumber. This test can take an additional argument passed by: `rake ios_cucumber[profile]`. Profiles can be set up for cucumber in the regular way by using the `cucumber.yml` file.
 
 #### To run Android tests:
-```
+```sh
 $ rake android_cucumber
 ```
 This works exactly the same as the iOS tests above.

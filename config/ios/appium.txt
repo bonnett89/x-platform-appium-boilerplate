@@ -1,6 +1,6 @@
 [caps]
 platformName="iOS"
-deviceName="iPhone SE"
+deviceName="iPhone 6"
 platformVersion="10.3"
 automationName="XCUITest"
-app="ios/HelloWorld.app.zip"
+app="ios/build/Release-iphonesimulator/HelloWorld.app"
