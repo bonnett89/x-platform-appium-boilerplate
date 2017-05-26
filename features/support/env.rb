@@ -18,8 +18,6 @@ driver = Appium::Driver.new(caps: caps, appium_lib: { port: appium_url.port })
 
 Appium.promote_appium_methods AppiumWorld
 
-puts driver
-
 World do
   page_factory = PageFactory.new(platform, driver)
   AppiumWorld.new(driver, page_factory)
