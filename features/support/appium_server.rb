@@ -9,21 +9,21 @@ class AppiumServer < StartAppiumServer
   @port = nil
   @command = nil
 
-  def self.start(host, port)
+  def self.start(host, port, no_logging)
     @host = host
     @port = port
-    spinner = TTY::Spinner.new('[:spinner] Appium starting ...', format: :dots)
+    spinner = TTY::Spinner.new('[:spinner] Starting Appium server ', format: :dots)
     if running?
       puts "Appium server already running at #{url}"
     else
-      @command = StartAppiumServer.new(@host, @port)
+      @command = StartAppiumServer.new(@host, @port, no_logging)
       @command.execute
       spinner.auto_spin
       loop do
         break if running?
       end
     end
-    spinner.stop('done')
+    spinner.success('(successful)')
   end
 
   def self.url
