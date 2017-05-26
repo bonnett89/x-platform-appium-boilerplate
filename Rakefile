@@ -6,7 +6,7 @@ require_relative './features/support/cucumber_bdd'
 
 desc 'Start an Appium Server'
 task :start_appium, [:block] do |_t, args|
-  appium_url = URI(get_server_configuration['appium_url'])
+  appium_url = URI(server_configuration['appium_url'])
   appium_host = appium_url.host
   appium_port = appium_url.port
   AppiumServer.start(appium_host, appium_port)
@@ -17,7 +17,19 @@ end
 desc 'Run Cucumber'
 task :cucumber, %i[platform profile] do |_t, args|
   platform = args[:platform]
+
+  if platform.nil? || !platform.match(/^(ios|android)$/i)
+    raise 'Please set a valid platform: ios / android'
+  end
+
   profile = args[:profile]
+
+  if profile.nil?
+    puts 'Running Cucumber with default profile'
+  else
+    puts "Running Cucumber with #{profile} profile"
+  end
+
   appium_server_url = AppiumServer.url
   CucumberBDD.new(platform, profile, appium_server_url).execute
 end
@@ -46,7 +58,7 @@ def block
   end
 end
 
-def get_server_configuration
+def server_configuration
   config_path = './config/server_config.yml'
   if File.exist?(config_path)
     YAML.load(File.read(config_path))
