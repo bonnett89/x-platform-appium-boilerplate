@@ -9,7 +9,7 @@ task :start_appium, [:block] do |_t, args|
   appium_url = URI(server_configuration['appium_url'])
   appium_host = appium_url.host
   appium_port = appium_url.port
-  no_logging = true
+  no_logging = false
   AppiumServer.start(appium_host, appium_port, no_logging)
 
   block unless args[:block] && args[:block] == 'false'
