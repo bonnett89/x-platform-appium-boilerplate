@@ -5,25 +5,26 @@ require_relative 'start_appium_server'
 
 # Appium server class
 class AppiumServer < StartAppiumServer
-  @host = nil
-  @port = nil
-  @command = nil
-
   def self.start(host, port, no_logging)
     @host = host
     @port = port
-    spinner = TTY::Spinner.new('[:spinner] Starting Appium server ', format: :dots)
+    @no_logging = no_logging
+    @spinner = TTY::Spinner.new('[:spinner] Starting Appium server ', format: :dots)
     if running?
       puts "Appium server already running at #{url}"
     else
-      @command = StartAppiumServer.new(@host, @port, no_logging)
-      @command.execute
-      spinner.auto_spin
-      loop do
-        break if running?
-      end
+      boot_server
+      @spinner.success('(successful)')
     end
-    spinner.success('(successful)')
+  end
+
+  def self.boot_server
+    @command = StartAppiumServer.new(@host, @port, @no_logging)
+    @command.execute
+    @spinner.auto_spin
+    loop do
+      break if running?
+    end
   end
 
   def self.url
